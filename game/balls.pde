@@ -81,4 +81,54 @@ class Ball {
       vy = -vy;
     }
   }
+  void collision(Ball other){
+  float dx = other.x - this.x;
+  float dy = other.y - this.y;
+  float dist = sqrt(dx*dx+dy*dy);
+  
+  if(dist < this.radius + other.radius){
+    float angle = atan2(dy,dx);
+    float sin = sin(angle), cos = cos(angle);
+    
+    float x1 = 0, y1 = 0;
+    float x2 = dx*cos+dy*sin;
+    float y2 = dy*cos-dx*sin;
+    
+    float vx1 = this.vx*cos+this.vy*sin;
+    float vy1 = this.vy*cos-this.vx*sin;
+    float vx2 = other.vx*cos+other.vy*sin;
+    float vy2 = other.vy*cos-other.vx*sin;
+
+    float vx1final = ((this.mass-other.mass)*vx1+2*other.mass*vx2)/(this.mass+other.mass);
+    float vx2final = ((other.mass-this.mass)*vx2+2*this.mass*vx1)/(this.mass+other.mass);
+    
+    vx1 = vx1final;
+    vx2 = vx2final;
+    
+
+
+    float absV = abs(vx1)+abs(vx2);
+    float overlap = (this.radius+other.radius)-abs(x1-x2);
+    x1 += vx1/absV*overlap;
+    x2 += vx2/absV*overlap;
+
+    // rotate the relative positions back
+    float x1final = x1*cos-y1*sin;
+    float y1final = y1*cos+x1*sin;
+    float x2final = x2*cos-y2*sin;
+    float y2final = y2*cos+x2*sin;
+    
+    other.x = this.x + x2final;
+    other.y = this.y + y2final;
+    
+    this.x = this.x + x1final;
+    this.y = this.y + y1final;
+    
+    //rotate vel back
+    this.vx = vx1*cos-vy1*sin;
+    this.vy = vy1*cos+vx1*sin;
+    other.vx = vx2*cos-vy2*sin;
+    other.vy = vy2*cos+vx2*sin; 
+    }
+  }
 }

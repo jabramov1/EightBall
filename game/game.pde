@@ -30,76 +30,10 @@ void draw(){
     balls[i].move();
     balls[i].friction();
   }
-  textSize(40);
-  textMode(LEFT);
-  fill(0);
-  text("Billiard Ball Collisions", width/4+100, 200);
   for(int i = 0; i < balls.length-1; i++){
     for(int j = i+1; j<balls.length; j++){
-      collision(balls[i], balls[j]);
+      balls[i].collision(balls[j]);
     }
   }
   
-}
-
-void collision(Ball b1, Ball b2){
-  // This solution fixes the glitch that occurs
-  // with multiple ball collisions.
-
-  float dx = b2.x - b1.x;
-  float dy = b2.y - b1.y;
-  float dist = sqrt(dx*dx+dy*dy);
-  
-  if(dist < b1.radius + b2.radius-1){
-    float angle = atan2(dy,dx);
-    float sin = sin(angle), cos = cos(angle);
-    
-    float x1 = 0, y1 = 0;
-    float x2 = dx*cos+dy*sin;
-    float y2 = dy*cos-dx*sin;
-    
-    // rotate velocity
-    float vx1 = b1.vx*cos+b1.vy*sin;
-    float vy1 = b1.vy*cos-b1.vx*sin;
-    float vx2 = b2.vx*cos+b2.vy*sin;
-    float vy2 = b2.vy*cos-b2.vx*sin;
-    
-    // resolve the 1D case
-    float vx1final = ((b1.mass-b2.mass)*vx1+2*b2.mass*vx2)/(b1.mass+b2.mass);
-    float vx2final = ((b2.mass-b1.mass)*vx2+2*b1.mass*vx1)/(b1.mass+b2.mass);
-    
-    vx1 = vx1final;
-    vx2 = vx2final;
-    
-    // fix the glitch by moving ball part equal to the overlap
-    // see video for more details(https://youtu.be/guWIF87CmBg)
-
-    float absV = abs(vx1)+abs(vx2);
-    float overlap = (b1.radius+b2.radius)-abs(x1-x2);
-    x1 += vx1/absV*overlap;
-    x2 += vx2/absV*overlap;
-
-    // rotate the relative positions back
-    float x1final = x1*cos-y1*sin;
-    float y1final = y1*cos+x1*sin;
-    float x2final = x2*cos-y2*sin;
-    float y2final = y2*cos+x2*sin;
-    
-    
-     // finally compute the new absolute positions
-    b2.x = b1.x + x2final;
-    b2.y = b1.y + y2final;
-    
-    b1.x = b1.x + x1final;
-    b1.y = b1.y + y1final;
-    
-    //rotate vel back
-    b1.vx = vx1*cos-vy1*sin;
-    b1.vy = vy1*cos+vx1*sin;
-    b2.vx = vx2*cos-vy2*sin;
-    b2.vy = vy2*cos+vx2*sin;
-   
-    
-    }
- 
 }
