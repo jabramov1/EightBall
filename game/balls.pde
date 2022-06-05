@@ -22,13 +22,21 @@ class Ball {
     }
     number=num;
   }
-  void display() {
+  void friction(){
     if (vx!= 0) {
       vx *= .987;
+      if (abs(vx)<0.1){
+        vx=0;
+      }
     }
-    if (vy!= 0) {
+    if(vy!= 0){
       vy *= .987;
+      if (abs(vy)<0.1){
+        vy=0;
+      }
     }
+  }
+  void display() {
   
  
     if (alive == 1) {
@@ -53,7 +61,7 @@ class Ball {
       }
     }
   }
-  void move() {
+  void move(){
     x += vx;
     y += vy;
     if (x > width - radius) {
