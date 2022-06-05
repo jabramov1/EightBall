@@ -28,6 +28,7 @@ void draw(){
   for(int i = 0; i < balls.length; i++){
     balls[i].display();
     balls[i].move();
+    balls[i].friction();
   }
   textSize(40);
   textMode(LEFT);
