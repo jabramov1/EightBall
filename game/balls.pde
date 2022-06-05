@@ -16,35 +16,35 @@ class Ball {
     mass = 0.5;
     c=col;
     if (num>7) {
-      play=1;
-    } else {
       play=2;
+    } else {
+      play=1;
     }
+    number=num;
   }
   void display() {
-    if (x > 0) {
+    if (vx!= 0) {
       vx *= .987;
     }
-    if (vy > 0) {
-      vy *= .987;
-    }
-    if(x < 0) {
-      vx *= .987;
-    }
-    if(vy < 0) {
+    if (vy!= 0) {
       vy *= .987;
     }
   
  
     if (alive == 1) {
       noStroke();
-      fill(c) ;
+      if(play==2){
+        fill(255);
+        circle(x,y,25);
+        fill(c);
+        circle(x,y,22);
+      }
+      else{
+      fill(c);
       circle(x, y, 25);
+      }
       fill(255);
       circle(x,y, 10);
-     // PFont font;
-     // font = createFont("interstate-boldcompressed.ttf",10);
-     // textFont(font);
       textSize(8);
       fill(0);
       textAlign(CENTER);

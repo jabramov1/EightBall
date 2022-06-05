@@ -24,7 +24,7 @@ void setup(){
 }
 
 void draw(){
-  background(255);
+  background(121);
   for(int i = 0; i < balls.length; i++){
     balls[i].display();
     balls[i].move();
