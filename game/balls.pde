@@ -15,9 +15,9 @@ class Ball {
     vx = 0;
     mass = 0.5;
     c=col;
-    if (num>7) {
+    if (num>8) {
       play=2;
-    } else {
+    } if (num<8){
       play=1;
     }
     number=num;
@@ -58,7 +58,7 @@ class Ball {
       textAlign(CENTER);
       if (number != 100) {
       text(str(number), x + .2, y + 4);
-      }
+      } 
     }
   }
   void move(){
@@ -108,9 +108,9 @@ class Ball {
 
 
     float absV = abs(vx1)+abs(vx2);
-    float overlap = (this.radius+other.radius)-abs(x1-x2);
-    x1 += vx1/absV*overlap;
-    x2 += vx2/absV*overlap;
+    float intersection = (this.radius+other.radius)-abs(x1-x2);
+    x1 += vx1/absV*intersection;
+    x2 += vx2/absV*intersection;
 
     // rotate the relative positions back
     float x1final = x1*cos-y1*sin;
