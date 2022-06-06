@@ -1,5 +1,9 @@
 class Table{
   color c;
-  public Table(col){
+  public Table(color col){
     c=col;
   }
+  void display() {
+    
+  }
+}

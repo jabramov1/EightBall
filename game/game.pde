@@ -20,10 +20,11 @@ int numBalls = 4;
 
 
 void setup(){
-  size(1280,720);
+  size(1280,1000);
 }
 
 void draw(){
+  
   background(121);
   for(int i = 0; i < balls.length; i++){
     balls[i].display();
