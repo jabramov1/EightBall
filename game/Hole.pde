@@ -7,6 +7,9 @@ class Holes{
     r=rad_;
   }
   void display(){
-    fill(20)
-    
+    fill(20);
+    circle(x,y,radius);
+    fill(200){
+      line(
   }
+}
