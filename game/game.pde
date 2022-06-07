@@ -16,20 +16,34 @@ Ball[] balls = {
   new Ball(825,400,color(135,20,0),15),
   new Ball(275,350,color(255),100),
 };
-int numBalls = 4;
+Hole[] Holes = {
+  new Hole(85,150,22),
+  new Hole(85,550,22),
+  new Hole(500,145,22),
+  new Hole(500,555,22),
+  new Hole(915,150,22),
+  new Hole(915,550,22),
+};
+
+Table table = new Table();
 
 
 void setup(){
-  size(1280,1000);
+  size(1000,700);
 }
 
 void draw(){
+  background(255);
+  table.display();
   
-  background(121);
+  noStroke();
   for(int i = 0; i < balls.length; i++){
     balls[i].display();
     balls[i].move();
     balls[i].friction();
+  }
+  for(int i = 0; i < Holes.length; i++){
+    Holes[i].display();
   }
   for(int i = 0; i < balls.length-1; i++){
     for(int j = i+1; j<balls.length; j++){

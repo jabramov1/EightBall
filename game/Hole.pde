@@ -1,15 +1,15 @@
-class Holes{
+class Hole{
   float x,y;
   float r;
-  hole(float x_, float y, float rad){
+  Hole(float x_, float y_, float rad){
     x=x_;
     y=y_;
-    r=rad_;
+    r=rad;
   }
   void display(){
     fill(20);
-    circle(x,y,radius);
-    fill(200){
-      line(
+    circle(x,y,r*2);
+    fill(255);
+    line(x, y, 340, 80);
   }
 }
