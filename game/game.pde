@@ -105,4 +105,12 @@ boolean BallsStill(){
     }
   }return ans;
 }
+void done(){
+  if(Score.a==8 || Score.b==8){
+    delay(600);
+    background(255);
+    textSize(20);
+    text("Game over. Won!!!",400,400);
+  }
+}
   

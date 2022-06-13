@@ -16,13 +16,13 @@ class Hole{
     float distance = dist(other.x, other.y, this.x, this.y);
     if (distance < r){
       other.alive = 0;
-    }if (other.number==16&& BallsStill()){
+    if (other.number==16&& BallsStill()){
       other.x=275;
       other.y=350;
       other.vx=0;
       other.vy=0;
       other.alive=1;
-  }
+    }
   if (other.number==8 && BallsStill() && (Score.a !=7 && Score.b!=7)){
       other.x=400;
       other.y=400;
@@ -31,4 +31,5 @@ class Hole{
       other.alive=1;
   }
 }
+  }
 }
