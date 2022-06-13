@@ -12,4 +12,10 @@ class Hole{
     fill(255);
     line(x, y, 340, 80);
   }
+  void pocketed(Ball other){
+    float distance = dist(other.x, other.y, this.x, this.y);
+    if (distance < other.radius-0.5){
+      other.alive = 0;
+    }
+  }
 }

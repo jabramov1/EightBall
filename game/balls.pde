@@ -6,6 +6,7 @@ class Ball {
   float radius;
   int play;
   int alive=1;
+  float counter;
 
   Ball(float x_, float y_, color col, int num) {
     x = x_;
@@ -21,17 +22,18 @@ class Ball {
       play=1;
     }
     number=num;
+    counter=0;
   }
   void friction(){
     if (vx!= 0) {
       vx *= .987;
-      if (abs(vx)<0.1){
+      if (abs(vx)<0.05){
         vx=0;
       }
     }
     if(vy!= 0){
       vy *= .987;
-      if (abs(vy)<0.1){
+      if (abs(vy)<0.05){
         vy=0;
       }
     }
@@ -61,26 +63,26 @@ class Ball {
       } 
     }
   }
+
   void move(){
     x += vx;
     y += vy;
-    if (x > width - radius) {
-      x = width - radius;
-      vx = -vx;
-    }
-    if (x < radius) {
-      x = radius;
-      vx = -vx;
-    }
-    if (y > height - radius) {
-      y = height - radius;
-      vy = -vy;
-    }
-    if (y < radius) {
-      y = radius;
-      vy = -vy;
+    if ((x > 897.5) && (y > 172 || y < 528)) {
+      x = 897.5;
+      vx *= -1;
+    } else if ((x < 102.5) && (y > 172 || y < 528)) {
+      x = 102.5;
+      vx *= -1;
+    } else if ((y > 535) && ((x > 107 && x < 478) || (x > 522 && x < 893))) {
+      y = 535;
+      vy *= -1;
+    } else if ((y < 165) && ((x > 107 && x < 478) || (x > 522 && x < 893)))  {
+      y = 165;
+      vy *= -1;
     }
   }
+  
+  
   void collision(Ball other){
   float dx = other.x - this.x;
   float dy = other.y - this.y;

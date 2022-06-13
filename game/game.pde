@@ -16,6 +16,8 @@ Ball[] balls = {
   new Ball(825,400,color(135,20,0),15),
   new Ball(275,350,color(255),100),
 };
+ float mX;
+ float mY;
 Hole[] Holes = {
   new Hole(85,150,22),
   new Hole(85,550,22),
@@ -24,6 +26,10 @@ Hole[] Holes = {
   new Hole(915,150,22),
   new Hole(915,550,22),
 };
+float power;
+ 
+ 
+
 
 Table table = new Table();
 
@@ -31,10 +37,34 @@ Table table = new Table();
 void setup(){
   size(1000,700);
 }
+void mouseReleased(){
+  if (BallsStill()){
+  power= dist(mouseX, mouseY, balls[15].x, balls[15].y);
+  if (power>10){
+  power=10;
+}float dx=balls[15].x-mouseX;
+ float dy=balls[15].y-mouseY;
+ balls[15].vx=dx*power/60;
+ balls[15].vy=dy*power/60;
+}
+}
+
 
 void draw(){
   background(255);
   table.display();
+  if (mousePressed && BallsStill()){
+    mX=mouseX;
+    mY=mouseY;
+    float dx=balls[15].x-mouseX;
+    float dy=balls[15].y-mouseY;
+    stroke(#DC143C);
+    line(mouseX , mouseY, balls[15].x +dx*0.9, balls[15].y+dy*0.9);
+    stroke(255);
+    line(balls[15].x, balls[15].y,mouseX,mouseY);
+  }
+ 
+  
   
   noStroke();
   for(int i = 0; i < balls.length; i++){
@@ -50,5 +80,13 @@ void draw(){
       balls[i].collision(balls[j]);
     }
   }
-  
+}
+boolean BallsStill(){
+  boolean ans = true;
+  for(int i = 0; i < balls.length; i++){
+    if (balls[i].vx !=0 || balls[i].vy !=0){
+      ans=false;
+      return ans;
+    }
+  }return ans;
 }
