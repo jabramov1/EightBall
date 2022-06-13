@@ -84,6 +84,8 @@ void draw(){
   }
   Score.changeScore();
   Score.changeTurn();
+  done();
+  
   for(int i = 0; i < balls.length-1; i++){
     for(int j = i+1; j<balls.length; j++){
       balls[i].collision(balls[j]);
@@ -94,6 +96,8 @@ void draw(){
   text(frameRate,20,20);
   text("Score A : " +Score.a, 150,20);
   text("Score B : " +Score.b, 250,20);
+  fill(0);
+  text("Turn player: "+Score.turn ,400,20);
   
 }
 boolean BallsStill(){
