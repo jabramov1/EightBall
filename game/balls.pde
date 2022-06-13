@@ -27,13 +27,13 @@ class Ball {
   void friction(){
     if (vx!= 0) {
       vx *= .987;
-      if (abs(vx)<0.05){
+      if (abs(vx)<0.01){
         vx=0;
       }
     }
     if(vy!= 0){
       vy *= .987;
-      if (abs(vy)<0.05){
+      if (abs(vy)<0.01){
         vy=0;
       }
     }

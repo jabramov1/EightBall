@@ -27,11 +27,13 @@ Hole[] Holes = {
   new Hole(915,550,22),
 };
 float power;
+float counter1;
  
  
 
 
 Table table = new Table();
+ScoreBoard Score= new ScoreBoard();
 
 
 void setup(){
@@ -40,12 +42,13 @@ void setup(){
 void mouseReleased(){
   if (BallsStill()){
   power= dist(mouseX, mouseY, balls[15].x, balls[15].y);
-  if (power>10){
-  power=10;
+  if (power>100){
+  power=100;
 }float dx=balls[15].x-mouseX;
  float dy=balls[15].y-mouseY;
- balls[15].vx=dx*power/60;
- balls[15].vy=dy*power/60;
+ balls[15].vx=dx*power/800;
+ balls[15].vy=dy*power/800;
+counter1=0;
 }
 }
 
@@ -63,6 +66,7 @@ void draw(){
     stroke(255);
     line(balls[15].x, balls[15].y,mouseX,mouseY);
   }
+  
  
   
   
@@ -72,14 +76,25 @@ void draw(){
     balls[i].move();
     balls[i].friction();
   }
-  for(int i = 0; i < Holes.length; i++){
-    Holes[i].display();
+  for (Hole h : Holes) {
+    h.display();
+    for (int i = 0; i < 15; i ++) {
+      h.pocketed(balls[i]);
+    }
   }
+  Score.changeScore();
+  Score.changeTurn();
   for(int i = 0; i < balls.length-1; i++){
     for(int j = i+1; j<balls.length; j++){
       balls[i].collision(balls[j]);
     }
   }
+  fill(0);
+  textSize(15);
+  text(frameRate,20,20);
+  text("Score A : " +Score.a, 150,20);
+  text("Score B : " +Score.b, 250,20);
+  
 }
 boolean BallsStill(){
   boolean ans = true;
@@ -90,3 +105,4 @@ boolean BallsStill(){
     }
   }return ans;
 }
+  
